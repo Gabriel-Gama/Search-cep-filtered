@@ -1,0 +1,83 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "CEP query API documentation",
+        "description": "This is an API that queries the address starting from the zip code",
+        "version": "1.0.0",
+        "contact": {
+            "email": "gabrieldiasgama@hotmail.com"
+        }
+    },
+    "paths": {
+        "/cep/{cep}": {
+            "get": {
+                "tags": [
+                    "CEP"
+                ],
+                "summary": "Create a search a zip code",
+                "description": "return the address according to the zip code provided",
+                "parameters": [
+                    {
+                        "name": "cep",
+                        "in": "path",
+                        "description": "Inform the zip code",
+                        "example": 12345678,
+                        "required": "true",
+                        "schema": {
+                            "maxLength": "8",
+                            "minLength": "8",
+                            "pattern": "^[0-9]{8}$",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cep"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Cep": {
+                "type": "object",
+                "properties": {
+                    "cep": {
+                        "type": "string",
+                        "description": "CEP",
+                        "example": 12345678
+                    },
+                    "logradouro": {
+                        "type": "string",
+                        "description": "Address",
+                        "example": "Rua General Osório"
+                    },
+                    "bairro": {
+                        "type": "string",
+                        "description": "Neighborhood",
+                        "example": "Fundinho"
+                    },
+                    "localidade": {
+                        "type": "string",
+                        "description": "City",
+                        "example": "Uberlândia"
+                    },
+                    "uf": {
+                        "type": "string",
+                        "description": "State",
+                        "example": "MG"
+                    }
+                }
+            }
+        }
+    }
+}
